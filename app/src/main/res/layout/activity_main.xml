@@ -9,6 +9,15 @@
     tools:context=".MainActivity">
 
     <TextView
+        android:id="@+id/champ_Histo"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="end"
+        android:maxLines="1"
+        android:textColor="@color/colorPrimary"
+        android:textSize="30dp"/>
+
+    <TextView
         android:id="@+id/champ_Input"
         android:layout_width="match_parent"
         android:layout_height="80dp"
@@ -154,7 +163,7 @@
             <TextView
                 android:id="@+id/ButtonComa"
                 style="@style/Button"
-                android:text="," />
+                android:text="." />
 
             <TextView
                 android:id="@+id/Button0"
