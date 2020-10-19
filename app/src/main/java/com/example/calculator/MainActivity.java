@@ -159,17 +159,19 @@ public class MainActivity extends AppCompatActivity{
         BoutonDiv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Champ_histo.append(Champ_saisie.getText().toString());
-                Champ_histo.append("/");
                 Operation="Div";
                 if (Champ_resultat.getText()==""){
+                    Champ_histo.append(Champ_saisie.getText().toString());
+                    Champ_histo.append("/");
                     CharSequence saisie1 =Champ_saisie.getText();
                     Nombre1 = Float.parseFloat(saisie1.toString());
                 }
 
                 if (Champ_resultat.getText()!=""){
-                    CharSequence saisie1 =Champ_resultat.getText();
-                    Nombre1 = Float.parseFloat(saisie1.toString());
+                    CharSequence resultat1 =Champ_resultat.getText();
+                    Nombre1 = Float.parseFloat(resultat1.toString());
+                    Champ_histo.setText(resultat1.toString());
+                    Champ_histo.append("/");
                 }
 
                 Champ_saisie.setText("");
@@ -179,30 +181,26 @@ public class MainActivity extends AppCompatActivity{
         BoutonMul.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                Champ_histo.append(Champ_saisie.getText().toString());
-                Champ_histo.append("X");
                 Operation="Mul";
 
                 // Tentative resolution crash si appui sans nombre selectionne
 //                if(Champ_histo.getText()==""){
-//                    runOnUiThread(new Runnable() {
-//                        public void run()
-//                        {
-//                            Toast.makeText(getApplicationContext(), "Please select a number", Toast.LENGTH_SHORT).show();
-//                        }
-//                    });
+//                    Toast.makeText(getApplicationContext(), "Please select a number", Toast.LENGTH_SHORT).show();
 //                    KeepGoing=false;
 //                }
 
                 if (Champ_resultat.getText()==""){
+                    Champ_histo.append(Champ_saisie.getText().toString());
+                    Champ_histo.append("X");
                     CharSequence saisie1 =Champ_saisie.getText();
                     Nombre1 = Float.parseFloat(saisie1.toString());
                 }
 
                 if (Champ_resultat.getText()!=""){
-                    CharSequence saisie1 =Champ_resultat.getText();
-                    Nombre1 = Float.parseFloat(saisie1.toString());
+                    CharSequence resultat1 =Champ_resultat.getText();
+                    Nombre1 = Float.parseFloat(resultat1.toString());
+                    Champ_histo.setText(resultat1.toString());
+                    Champ_histo.append("X");
                 }
 
                 Champ_saisie.setText("");
@@ -213,17 +211,19 @@ public class MainActivity extends AppCompatActivity{
         BoutonMinus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Champ_histo.append(Champ_saisie.getText().toString());
-                Champ_histo.append("-");
                 Operation="Minus";
                 if (Champ_resultat.getText()==""){
+                    Champ_histo.append(Champ_saisie.getText().toString());
+                    Champ_histo.append("-");
                     CharSequence saisie1 =Champ_saisie.getText();
                     Nombre1 = Float.parseFloat(saisie1.toString());
                 }
 
                 if (Champ_resultat.getText()!=""){
-                    CharSequence saisie1 =Champ_resultat.getText();
-                    Nombre1 = Float.parseFloat(saisie1.toString());
+                    CharSequence resultat1 =Champ_resultat.getText();
+                    Nombre1 = Float.parseFloat(resultat1.toString());
+                    Champ_histo.setText(resultat1.toString());
+                    Champ_histo.append("-");
                 }
 
                 Champ_saisie.setText("");
@@ -233,17 +233,19 @@ public class MainActivity extends AppCompatActivity{
         BoutonPlus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Champ_histo.append(Champ_saisie.getText().toString());
-                Champ_histo.append("+");
                 Operation="Plus";
                 if (Champ_resultat.getText()==""){
+                    Champ_histo.append(Champ_saisie.getText().toString());
+                    Champ_histo.append("+");
                     CharSequence saisie1 =Champ_saisie.getText();
                     Nombre1 = Float.parseFloat(saisie1.toString());
                 }
 
                 if (Champ_resultat.getText()!=""){
-                    CharSequence saisie1 =Champ_resultat.getText();
-                    Nombre1 = Float.parseFloat(saisie1.toString());
+                    CharSequence resultat1 =Champ_resultat.getText();
+                    Nombre1 = Float.parseFloat(resultat1.toString());
+                    Champ_histo.setText(resultat1.toString());
+                    Champ_histo.append("+");
                 }
 
                 Champ_saisie.setText("");
