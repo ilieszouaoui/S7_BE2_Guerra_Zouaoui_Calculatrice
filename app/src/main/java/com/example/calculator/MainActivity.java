@@ -5,12 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity{
 
     public float Nombre1;
     public float Nombre2;
     public String Operation;
+    public boolean KeepGoing=true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +55,6 @@ public class MainActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 Champ_saisie.append("0");
-                Champ_histo.append("0");
             }
         });
 
@@ -61,7 +62,6 @@ public class MainActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 Champ_saisie.append("1");
-                Champ_histo.append("1");
             }
         });
 
@@ -69,7 +69,6 @@ public class MainActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 Champ_saisie.append("2");
-                Champ_histo.append("2");
             }
         });
 
@@ -77,35 +76,30 @@ public class MainActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 Champ_saisie.append("3");
-                Champ_histo.append("3");
             }
         });
         Bouton4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Champ_saisie.append("4");
-                Champ_histo.append("4");
             }
         });
         Bouton5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Champ_saisie.append("5");
-                Champ_histo.append("5");
             }
         });
         Bouton6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Champ_saisie.append("6");
-                Champ_histo.append("6");
             }
         });
         Bouton7.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Champ_saisie.append("7");
-                Champ_histo.append("7");
             }
         });
 
@@ -113,7 +107,6 @@ public class MainActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 Champ_saisie.append("8");
-                Champ_histo.append("8");
             }
         });
 
@@ -121,7 +114,6 @@ public class MainActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 Champ_saisie.append("9");
-                Champ_histo.append("9");
             }
         });
 
@@ -129,13 +121,15 @@ public class MainActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 Champ_saisie.append(".");
-                Champ_histo.append(".");
             }
         });
 
         BoutonRet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                CharSequence saisie1=Champ_saisie.getText();
+                saisie1 = saisie1.subSequence(0, saisie1.length() - 1);
+                Champ_saisie.setText(saisie1);
             }
         });
 
@@ -152,7 +146,6 @@ public class MainActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 Champ_saisie.append("(");
-                Champ_histo.append("(");
             }
         });
 
@@ -160,17 +153,25 @@ public class MainActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 Champ_saisie.append(")");
-                Champ_histo.append(")");
             }
         });
 
         BoutonDiv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Champ_histo.append(Champ_saisie.getText().toString());
                 Champ_histo.append("/");
                 Operation="Div";
-                CharSequence saisie1 =Champ_saisie.getText();
-                Nombre1 = Float.parseFloat(saisie1.toString());
+                if (Champ_resultat.getText()==""){
+                    CharSequence saisie1 =Champ_saisie.getText();
+                    Nombre1 = Float.parseFloat(saisie1.toString());
+                }
+
+                if (Champ_resultat.getText()!=""){
+                    CharSequence saisie1 =Champ_resultat.getText();
+                    Nombre1 = Float.parseFloat(saisie1.toString());
+                }
+
                 Champ_saisie.setText("");
             }
         });
@@ -178,10 +179,32 @@ public class MainActivity extends AppCompatActivity{
         BoutonMul.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                Champ_histo.append(Champ_saisie.getText().toString());
                 Champ_histo.append("X");
                 Operation="Mul";
-                CharSequence saisie1 =Champ_saisie.getText();
-                Nombre1 = Float.parseFloat(saisie1.toString());
+
+                // Tentative resolution crash si appui sans nombre selectionne
+//                if(Champ_histo.getText()==""){
+//                    runOnUiThread(new Runnable() {
+//                        public void run()
+//                        {
+//                            Toast.makeText(getApplicationContext(), "Please select a number", Toast.LENGTH_SHORT).show();
+//                        }
+//                    });
+//                    KeepGoing=false;
+//                }
+
+                if (Champ_resultat.getText()==""){
+                    CharSequence saisie1 =Champ_saisie.getText();
+                    Nombre1 = Float.parseFloat(saisie1.toString());
+                }
+
+                if (Champ_resultat.getText()!=""){
+                    CharSequence saisie1 =Champ_resultat.getText();
+                    Nombre1 = Float.parseFloat(saisie1.toString());
+                }
+
                 Champ_saisie.setText("");
 
             }
@@ -190,10 +213,19 @@ public class MainActivity extends AppCompatActivity{
         BoutonMinus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Champ_histo.append(Champ_saisie.getText().toString());
                 Champ_histo.append("-");
                 Operation="Minus";
-                CharSequence saisie1 =Champ_saisie.getText();
-                Nombre1 = Float.parseFloat(saisie1.toString());
+                if (Champ_resultat.getText()==""){
+                    CharSequence saisie1 =Champ_saisie.getText();
+                    Nombre1 = Float.parseFloat(saisie1.toString());
+                }
+
+                if (Champ_resultat.getText()!=""){
+                    CharSequence saisie1 =Champ_resultat.getText();
+                    Nombre1 = Float.parseFloat(saisie1.toString());
+                }
+
                 Champ_saisie.setText("");
             }
         });
@@ -201,10 +233,19 @@ public class MainActivity extends AppCompatActivity{
         BoutonPlus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Champ_histo.append(Champ_saisie.getText().toString());
                 Champ_histo.append("+");
                 Operation="Plus";
-                CharSequence saisie1 =Champ_saisie.getText();
-                Nombre1 = Float.parseFloat(saisie1.toString());
+                if (Champ_resultat.getText()==""){
+                    CharSequence saisie1 =Champ_saisie.getText();
+                    Nombre1 = Float.parseFloat(saisie1.toString());
+                }
+
+                if (Champ_resultat.getText()!=""){
+                    CharSequence saisie1 =Champ_resultat.getText();
+                    Nombre1 = Float.parseFloat(saisie1.toString());
+                }
+
                 Champ_saisie.setText("");
             }
         });
@@ -213,6 +254,7 @@ public class MainActivity extends AppCompatActivity{
         BoutonEqual.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Champ_histo.append(Champ_saisie.getText().toString());
                 float calcul=0;
                 CharSequence saisie2 =Champ_saisie.getText();
                 Nombre2 = Float.parseFloat(saisie2.toString());
@@ -237,6 +279,8 @@ public class MainActivity extends AppCompatActivity{
                 Champ_resultat.setText(Float.toString(calcul));
             }
         });
+
+
 
 
     }
