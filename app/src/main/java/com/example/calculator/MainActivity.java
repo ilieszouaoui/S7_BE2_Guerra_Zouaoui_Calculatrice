@@ -147,15 +147,26 @@ public class MainActivity extends AppCompatActivity{
         BoutonRet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (ButtonInitialize == false) {
+                    if (Champ_resultat.getText() != "") {
+                        ButtonInitialize = true;
+                    }
 
-                if(ButtonInitialize) {
-                    CharSequence saisie1 = Champ_saisie.getText();
-                    saisie1 = saisie1.subSequence(0, saisie1.length() - 1);
-                    Champ_saisie.setText(saisie1);
+                    else {
+                        Toast.makeText(getApplicationContext(), "Please select numbers", Toast.LENGTH_SHORT).show();
+                    }
                 }
 
-                else{
-                    Toast.makeText(getApplicationContext(), "Please select numbers", Toast.LENGTH_SHORT).show();
+                if (ButtonInitialize) {
+                    if(Champ_saisie.getText() != "") {
+                        CharSequence saisie1 = Champ_saisie.getText();
+                        saisie1 = saisie1.subSequence(0, saisie1.length() - 1);
+                        Champ_saisie.setText(saisie1);
+                    }
+
+                    else{
+                        Toast.makeText(getApplicationContext(), "Please select numbers", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
 
@@ -358,7 +369,16 @@ public class MainActivity extends AppCompatActivity{
 
                     ButtonInitialize = false;
                     Champ_saisie.setText("");
-                    Champ_resultat.setText(Float.toString(calcul));
+                    String result=Float.toString(calcul);
+
+                    //Correction du probleme de virgule pour les entiers
+                    String calc[]=result.split("\\.");
+                    if(calc.length>1){
+                        if(calc[1].equals("0")){
+                            result=calc[0];
+                        }
+                    }
+                    Champ_resultat.setText(result);
                 }
 
                 else{
@@ -366,9 +386,5 @@ public class MainActivity extends AppCompatActivity{
                 }
             }
         });
-
-
-
-
     }
 }
