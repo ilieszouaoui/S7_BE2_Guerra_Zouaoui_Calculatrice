@@ -50,22 +50,23 @@
             <TextView
                 android:id="@+id/ButtonRes"
                 style="@style/ActionButton"
-                android:text="Res" />
+                android:background="@color/colorReset"
+                android:text="C" />
 
             <TextView
                 android:id="@+id/ButtonPar1"
                 style="@style/ActionButton"
-                android:text="(" />
+                android:text="+/-" />
 
             <TextView
                 android:id="@+id/ButtonPar2"
                 style="@style/ActionButton"
-                android:text=")" />
+                android:text="%" />
 
             <TextView
                 android:id="@+id/ButtonDiv"
                 style="@style/ActionButton"
-                android:text="/" />
+                android:text="÷" />
 
         </LinearLayout>
 
@@ -93,7 +94,7 @@
             <TextView
                 android:id="@+id/ButtonMul"
                 style="@style/ActionButton"
-                android:text="X" />
+                android:text="×" />
 
         </LinearLayout>
 
@@ -173,7 +174,8 @@
             <TextView
                 android:id="@+id/ReturnButton"
                 style="@style/Button"
-                android:text="Ret" />
+                android:textSize="50dp"
+                android:text="⇐" />
 
             <TextView
                 android:id="@+id/ButtonEqual"

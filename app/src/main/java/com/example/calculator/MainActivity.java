@@ -12,7 +12,7 @@ public class MainActivity extends AppCompatActivity{
     public float Nombre1;
     public float Nombre2;
     public String Operation;
-    public boolean KeepGoing=true;
+    public boolean ButtonInitialize;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +22,9 @@ public class MainActivity extends AppCompatActivity{
         final TextView Champ_histo = (TextView) findViewById(R.id.champ_Histo);
         final TextView Champ_saisie = (TextView) findViewById(R.id.champ_Input);
         final TextView Champ_resultat = (TextView) findViewById(R.id.champ_Resultat);
+
+        ButtonInitialize=false;
+
 
 
         //recuperation des boutons
@@ -100,6 +103,8 @@ public class MainActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 Champ_saisie.append("7");
+                // Tentative resolution crash
+                //ButtonInitialize=true;
             }
         });
 
@@ -145,14 +150,17 @@ public class MainActivity extends AppCompatActivity{
         BoutonPar1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Champ_saisie.append("(");
+                Champ_saisie.append("-");
             }
         });
 
         BoutonPar2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Champ_saisie.append(")");
+                CharSequence saisie1=Champ_saisie.getText();
+                float saisie2=Float.parseFloat(saisie1.toString());
+                saisie2=0.01f*saisie2;
+                Champ_saisie.setText(Float.toString(saisie2));
             }
         });
 
@@ -162,7 +170,7 @@ public class MainActivity extends AppCompatActivity{
                 Operation="Div";
                 if (Champ_resultat.getText()==""){
                     Champ_histo.append(Champ_saisie.getText().toString());
-                    Champ_histo.append("/");
+                    Champ_histo.append("÷");
                     CharSequence saisie1 =Champ_saisie.getText();
                     Nombre1 = Float.parseFloat(saisie1.toString());
                 }
@@ -171,9 +179,8 @@ public class MainActivity extends AppCompatActivity{
                     CharSequence resultat1 =Champ_resultat.getText();
                     Nombre1 = Float.parseFloat(resultat1.toString());
                     Champ_histo.setText(resultat1.toString());
-                    Champ_histo.append("/");
+                    Champ_histo.append("÷");
                 }
-
                 Champ_saisie.setText("");
             }
         });
@@ -183,15 +190,14 @@ public class MainActivity extends AppCompatActivity{
             public void onClick(View v) {
                 Operation="Mul";
 
-                // Tentative resolution crash si appui sans nombre selectionne
-//                if(Champ_histo.getText()==""){
+//                // Tentative resolution crash si appui sans nombre selectionne
+//                if(ButtonInitialize==false){
 //                    Toast.makeText(getApplicationContext(), "Please select a number", Toast.LENGTH_SHORT).show();
-//                    KeepGoing=false;
 //                }
 
                 if (Champ_resultat.getText()==""){
                     Champ_histo.append(Champ_saisie.getText().toString());
-                    Champ_histo.append("X");
+                    Champ_histo.append("×");
                     CharSequence saisie1 =Champ_saisie.getText();
                     Nombre1 = Float.parseFloat(saisie1.toString());
                 }
@@ -200,7 +206,7 @@ public class MainActivity extends AppCompatActivity{
                     CharSequence resultat1 =Champ_resultat.getText();
                     Nombre1 = Float.parseFloat(resultat1.toString());
                     Champ_histo.setText(resultat1.toString());
-                    Champ_histo.append("X");
+                    Champ_histo.append("×");
                 }
 
                 Champ_saisie.setText("");
