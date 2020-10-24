@@ -11,8 +11,11 @@ public class MainActivity extends AppCompatActivity{
 
     public float Nombre1;
     public float Nombre2;
+    float calc_succ;
     public String Operation;
     public boolean ButtonInitialize;
+    public boolean AlreadyRuning;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,8 +27,6 @@ public class MainActivity extends AppCompatActivity{
         final TextView Champ_resultat = (TextView) findViewById(R.id.champ_Resultat);
 
         ButtonInitialize=false;
-
-
 
         //recuperation des boutons
         TextView Bouton0 = (TextView) findViewById(R.id.Button0);
@@ -49,9 +50,6 @@ public class MainActivity extends AppCompatActivity{
         TextView BoutonMinus = (TextView) findViewById(R.id.ButtonMinus);
         TextView BoutonPlus = (TextView) findViewById(R.id.ButtonPlus);
         TextView BoutonEqual = (TextView) findViewById(R.id.ButtonEqual);
-
-
-
 
         //Association de la valeur du bouton au click
         Bouton0.setOnClickListener(new View.OnClickListener() {
@@ -147,26 +145,25 @@ public class MainActivity extends AppCompatActivity{
         BoutonRet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (ButtonInitialize == false) {
-                    if (Champ_resultat.getText() != "") {
-                        ButtonInitialize = true;
-                    }
-
-                    else {
-                        Toast.makeText(getApplicationContext(), "Please select numbers", Toast.LENGTH_SHORT).show();
-                    }
-                }
 
                 if (ButtonInitialize) {
                     if(Champ_saisie.getText() != "") {
+
                         CharSequence saisie1 = Champ_saisie.getText();
-                        saisie1 = saisie1.subSequence(0, saisie1.length() - 1);
-                        Champ_saisie.setText(saisie1);
+                        if(saisie1.length()>0){
+                            saisie1 = saisie1.subSequence(0, saisie1.length() - 1);
+                            Champ_saisie.setText(saisie1);
+                        }
+
+                        else{
+                            Toast.makeText(getApplicationContext(), "Please select numbers", Toast.LENGTH_SHORT).show();
+                        }
                     }
 
-                    else{
-                        Toast.makeText(getApplicationContext(), "Please select numbers", Toast.LENGTH_SHORT).show();
-                    }
+                }
+
+                else{
+                    Toast.makeText(getApplicationContext(), "Please select numbers", Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -178,6 +175,7 @@ public class MainActivity extends AppCompatActivity{
                 Champ_histo.setText("");
                 Champ_saisie.setText("");
                 Champ_resultat.setText("");
+                ButtonInitialize = false;
             }
         });
 
@@ -250,26 +248,43 @@ public class MainActivity extends AppCompatActivity{
                         Toast.makeText(getApplicationContext(), "Please select numbers", Toast.LENGTH_SHORT).show();
                     }
                 }
+//                if(AlreadyRuning){
+//                    Toast.makeText(getApplicationContext(), "Please select numbers", Toast.LENGTH_SHORT).show();
+//                }
 
-                if(ButtonInitialize) {
-                    Operation = "Mul";
-                    if (Champ_resultat.getText() == "") {
-                        Champ_histo.append(Champ_saisie.getText().toString());
-                        Champ_histo.append("×");
-                        CharSequence saisie1 = Champ_saisie.getText();
-                        Nombre1 = Float.parseFloat(saisie1.toString());
+                //else {
+
+                    if (ButtonInitialize) {
+                        Operation = "Mul";
+                        // Tntative resolution appuis successifs boutons actions
+                        //AlreadyRuning = true;
+
+                        //Tentative resolution calculs successifs
+//                        if(Champ_histo.getText()!=""){
+//                            CharSequence saisie2 = Champ_saisie.getText();
+//                            float Nombre3 = Float.parseFloat(saisie2.toString());
+//                            Champ_histo.append(Champ_saisie.getText().toString());
+//                            float calc_succ= Nombre1*Nombre3;
+//                            Champ_resultat.setText(Float.toString(calc_succ));
+//                        }
+
+                        if (Champ_resultat.getText() == "") {
+                            Champ_histo.append(Champ_saisie.getText().toString());
+                            Champ_histo.append("×");
+                            CharSequence saisie1 = Champ_saisie.getText();
+                            Nombre1 = Float.parseFloat(saisie1.toString());
+                        }
+
+                        if (Champ_resultat.getText() != "") {
+                            CharSequence resultat1 = Champ_resultat.getText();
+                            Nombre1 = Float.parseFloat(resultat1.toString());
+                            Champ_histo.setText(resultat1.toString());
+                            Champ_histo.append("×");
+                        }
+                        Champ_saisie.setText("");
                     }
-
-                    if (Champ_resultat.getText() != "") {
-                        CharSequence resultat1 = Champ_resultat.getText();
-                        Nombre1 = Float.parseFloat(resultat1.toString());
-                        Champ_histo.setText(resultat1.toString());
-                        Champ_histo.append("×");
-                    }
-
-                    Champ_saisie.setText("");
                 }
-            }
+            //}
         });
 
         BoutonMinus.setOnClickListener(new View.OnClickListener() {
@@ -368,6 +383,7 @@ public class MainActivity extends AppCompatActivity{
                     }
 
                     ButtonInitialize = false;
+                    // AlreadyRuning = false;
                     Champ_saisie.setText("");
                     String result=Float.toString(calcul);
 
