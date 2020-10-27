@@ -14,42 +14,134 @@ public class MainActivity extends AppCompatActivity{
     float calc_succ;
     public String Operation;
     public boolean ButtonInitialize;
-    public boolean AlreadyRuning;
 
+    public TextView Champ_histo;
+    public TextView Champ_saisie;
+    public TextView Champ_resultat;
+
+    //Recuperation des boutons
+    TextView Bouton0;
+    TextView Bouton1;
+    TextView Bouton2;
+    TextView Bouton3;
+    TextView Bouton4;
+    TextView Bouton5;
+    TextView Bouton6;
+    TextView Bouton7;
+    TextView Bouton8;
+    TextView Bouton9;
+    TextView BoutonComa;
+    TextView BoutonRet;
+
+    TextView BoutonRes;
+    TextView BoutonPar1;
+    TextView BoutonPar2;
+    TextView BoutonDiv;
+    TextView BoutonMul;
+    TextView BoutonMinus;
+    TextView BoutonPlus;
+    TextView BoutonEqual;
+
+
+
+
+    private void TraiteBouton(String Operation) {
+        if(ButtonInitialize==false){
+            if(Champ_resultat.getText() != ""){
+                ButtonInitialize=true;
+            }
+
+            else{
+                Toast.makeText(getApplicationContext(), "Please select numbers", Toast.LENGTH_SHORT).show();
+            }
+        }
+
+        if (ButtonInitialize) {
+
+//            //Tentative resolution calculs successifs
+//            if(Champ_histo.getText()!=""){
+//                CharSequence saisie2 = Champ_saisie.getText();
+//                float Nombre3 = Float.parseFloat(saisie2.toString());
+//                Champ_histo.append(Champ_saisie.getText().toString());
+//
+//                if (Operation == "Div") {
+//                    calc_succ= Nombre1/Nombre3;
+//                }
+//                if (Operation == "Mul") {
+//                    calc_succ= Nombre1*Nombre3;
+//                }
+//                if (Operation == "Minus") {
+//                    calc_succ= Nombre1-Nombre3;
+//                }
+//                if (Operation == "Plus") {
+//                    calc_succ= Nombre1+Nombre3;
+//                }
+//                Champ_resultat.setText(Float.toString(calc_succ));
+//            }
+//            //fin tentative
+
+            if (Champ_resultat.getText() == "") {
+                Champ_histo.append(Champ_saisie.getText().toString());
+                CharSequence saisie1 = Champ_saisie.getText();
+                Nombre1 = Float.parseFloat(saisie1.toString());
+            }
+
+            if (Champ_resultat.getText() != "") {
+                CharSequence resultat1 = Champ_resultat.getText();
+                Nombre1 = Float.parseFloat(resultat1.toString());
+                Champ_histo.setText(resultat1.toString());
+            }
+
+            if (Operation == "Div") {
+                Champ_histo.append("÷");
+            }
+            if (Operation == "Mul") {
+                Champ_histo.append("×");
+            }
+            if (Operation == "Minus") {
+                Champ_histo.append("-");
+            }
+            if (Operation == "Plus") {
+                Champ_histo.append("+");
+            }
+            Champ_saisie.setText("");
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        final TextView Champ_histo = (TextView) findViewById(R.id.champ_Histo);
-        final TextView Champ_saisie = (TextView) findViewById(R.id.champ_Input);
-        final TextView Champ_resultat = (TextView) findViewById(R.id.champ_Resultat);
-
         ButtonInitialize=false;
 
-        //recuperation des boutons
-        TextView Bouton0 = (TextView) findViewById(R.id.Button0);
-        TextView Bouton1 = (TextView) findViewById(R.id.Button1);
-        TextView Bouton2 = (TextView) findViewById(R.id.Button2);
-        TextView Bouton3 = (TextView) findViewById(R.id.Button3);
-        TextView Bouton4 = (TextView) findViewById(R.id.Button4);
-        TextView Bouton5 = (TextView) findViewById(R.id.Button5);
-        TextView Bouton6 = (TextView) findViewById(R.id.Button6);
-        TextView Bouton7 = (TextView) findViewById(R.id.Button7);
-        TextView Bouton8 = (TextView) findViewById(R.id.Button8);
-        TextView Bouton9 = (TextView) findViewById(R.id.Button9);
-        TextView BoutonComa = (TextView) findViewById(R.id.ButtonComa);
-        TextView BoutonRet = (TextView) findViewById(R.id.ReturnButton);
+        //Recuperation des champs de textes
+        Champ_histo = (TextView) findViewById(R.id.champ_Histo);
+        Champ_saisie = (TextView) findViewById(R.id.champ_Input);
+        Champ_resultat = (TextView) findViewById(R.id.champ_Resultat);
 
-        TextView BoutonRes = (TextView) findViewById(R.id.ButtonRes);
-        TextView BoutonPar1 = (TextView) findViewById(R.id.ButtonPar1);
-        TextView BoutonPar2 = (TextView) findViewById(R.id.ButtonPar2);
-        TextView BoutonDiv = (TextView) findViewById(R.id.ButtonDiv);
-        TextView BoutonMul = (TextView) findViewById(R.id.ButtonMul);
-        TextView BoutonMinus = (TextView) findViewById(R.id.ButtonMinus);
-        TextView BoutonPlus = (TextView) findViewById(R.id.ButtonPlus);
-        TextView BoutonEqual = (TextView) findViewById(R.id.ButtonEqual);
+        //Recuperation des boutons
+        Bouton0 = (TextView) findViewById(R.id.Button0);
+        Bouton1 = (TextView) findViewById(R.id.Button1);
+        Bouton2 = (TextView) findViewById(R.id.Button2);
+        Bouton3 = (TextView) findViewById(R.id.Button3);
+        Bouton4 = (TextView) findViewById(R.id.Button4);
+        Bouton5 = (TextView) findViewById(R.id.Button5);
+        Bouton6 = (TextView) findViewById(R.id.Button6);
+        Bouton7 = (TextView) findViewById(R.id.Button7);
+        Bouton8 = (TextView) findViewById(R.id.Button8);
+        Bouton9 = (TextView) findViewById(R.id.Button9);
+        BoutonComa = (TextView) findViewById(R.id.ButtonComa);
+        BoutonRet = (TextView) findViewById(R.id.ReturnButton);
+
+        BoutonRes = (TextView) findViewById(R.id.ButtonRes);
+        BoutonPar1 = (TextView) findViewById(R.id.ButtonPar1);
+        BoutonPar2 = (TextView) findViewById(R.id.ButtonPar2);
+        BoutonDiv = (TextView) findViewById(R.id.ButtonDiv);
+        BoutonMul = (TextView) findViewById(R.id.ButtonMul);
+        BoutonMinus = (TextView) findViewById(R.id.ButtonMinus);
+        BoutonPlus = (TextView) findViewById(R.id.ButtonPlus);
+        BoutonEqual = (TextView) findViewById(R.id.ButtonEqual);
 
         //Association de la valeur du bouton au click
         Bouton0.setOnClickListener(new View.OnClickListener() {
@@ -201,88 +293,20 @@ public class MainActivity extends AppCompatActivity{
             }
         });
 
+        // Traitement des boutons d'actions avec la methode TraiteBouton
         BoutonDiv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                if(ButtonInitialize==false){
-                    if(Champ_resultat.getText() != ""){
-                        ButtonInitialize=true;
-                    }
-
-                    else{
-                        Toast.makeText(getApplicationContext(), "Please select numbers", Toast.LENGTH_SHORT).show();
-                    }
-                }
-
-                if(ButtonInitialize) {
-                    Operation = "Div";
-                    if (Champ_resultat.getText() == "") {
-                        Champ_histo.append(Champ_saisie.getText().toString());
-                        Champ_histo.append("÷");
-                        CharSequence saisie1 = Champ_saisie.getText();
-                        Nombre1 = Float.parseFloat(saisie1.toString());
-                    }
-
-                    if (Champ_resultat.getText() != "") {
-                        CharSequence resultat1 = Champ_resultat.getText();
-                        Nombre1 = Float.parseFloat(resultat1.toString());
-                        Champ_histo.setText(resultat1.toString());
-                        Champ_histo.append("÷");
-                    }
-                    Champ_saisie.setText("");
-                }
+                Operation = "Div";
+                TraiteBouton(Operation);
             }
         });
 
         BoutonMul.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                if(ButtonInitialize==false){
-                    if(Champ_resultat.getText() != ""){
-                        ButtonInitialize=true;
-                    }
-
-                    else{
-                        Toast.makeText(getApplicationContext(), "Please select numbers", Toast.LENGTH_SHORT).show();
-                    }
-                }
-//                if(AlreadyRuning){
-//                    Toast.makeText(getApplicationContext(), "Please select numbers", Toast.LENGTH_SHORT).show();
-//                }
-
-                //else {
-
-                    if (ButtonInitialize) {
-                        Operation = "Mul";
-                        // Tntative resolution appuis successifs boutons actions
-                        //AlreadyRuning = true;
-
-                        //Tentative resolution calculs successifs
-//                        if(Champ_histo.getText()!=""){
-//                            CharSequence saisie2 = Champ_saisie.getText();
-//                            float Nombre3 = Float.parseFloat(saisie2.toString());
-//                            Champ_histo.append(Champ_saisie.getText().toString());
-//                            float calc_succ= Nombre1*Nombre3;
-//                            Champ_resultat.setText(Float.toString(calc_succ));
-//                        }
-
-                        if (Champ_resultat.getText() == "") {
-                            Champ_histo.append(Champ_saisie.getText().toString());
-                            Champ_histo.append("×");
-                            CharSequence saisie1 = Champ_saisie.getText();
-                            Nombre1 = Float.parseFloat(saisie1.toString());
-                        }
-
-                        if (Champ_resultat.getText() != "") {
-                            CharSequence resultat1 = Champ_resultat.getText();
-                            Nombre1 = Float.parseFloat(resultat1.toString());
-                            Champ_histo.setText(resultat1.toString());
-                            Champ_histo.append("×");
-                        }
-                        Champ_saisie.setText("");
-                    }
+                Operation = "Mul";
+                TraiteBouton(Operation);
                 }
             //}
         });
@@ -290,73 +314,20 @@ public class MainActivity extends AppCompatActivity{
         BoutonMinus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(ButtonInitialize==false){
-                    if(Champ_resultat.getText() != ""){
-                        ButtonInitialize=true;
-                    }
-
-                    else{
-                        Toast.makeText(getApplicationContext(), "Please select numbers", Toast.LENGTH_SHORT).show();
-                    }
-                }
-
-                if(ButtonInitialize) {
-                    Operation = "Minus";
-                    if (Champ_resultat.getText() == "") {
-                        Champ_histo.append(Champ_saisie.getText().toString());
-                        Champ_histo.append("-");
-                        CharSequence saisie1 = Champ_saisie.getText();
-                        Nombre1 = Float.parseFloat(saisie1.toString());
-                    }
-
-                    if (Champ_resultat.getText() != "") {
-                        CharSequence resultat1 = Champ_resultat.getText();
-                        Nombre1 = Float.parseFloat(resultat1.toString());
-                        Champ_histo.setText(resultat1.toString());
-                        Champ_histo.append("-");
-                    }
-
-                    Champ_saisie.setText("");
-                }
+                Operation = "Minus";
+                TraiteBouton(Operation);
             }
         });
 
         BoutonPlus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(ButtonInitialize==false){
-                    if(Champ_resultat.getText() != ""){
-                        ButtonInitialize=true;
-                    }
-
-                    else{
-                        Toast.makeText(getApplicationContext(), "Please select numbers", Toast.LENGTH_SHORT).show();
-                    }
-                }
-
-                if(ButtonInitialize) {
-                    Operation = "Plus";
-                    if (Champ_resultat.getText() == "") {
-                        Champ_histo.append(Champ_saisie.getText().toString());
-                        Champ_histo.append("+");
-                        CharSequence saisie1 = Champ_saisie.getText();
-                        Nombre1 = Float.parseFloat(saisie1.toString());
-                    }
-
-                    if (Champ_resultat.getText() != "") {
-                        CharSequence resultat1 = Champ_resultat.getText();
-                        Nombre1 = Float.parseFloat(resultat1.toString());
-                        Champ_histo.setText(resultat1.toString());
-                        Champ_histo.append("+");
-                    }
-
-                    Champ_saisie.setText("");
-                }
+                Operation = "Plus";
+                TraiteBouton(Operation);
             }
-
         });
 
-        // Traitement de l'opération
+        //Traitement de l'opération
         BoutonEqual.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
