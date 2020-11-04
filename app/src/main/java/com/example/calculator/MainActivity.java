@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity{
 
     public float Nombre1;
@@ -60,20 +62,32 @@ public class MainActivity extends AppCompatActivity{
 
 //            //Tentative resolution calculs successifs
 //            if(Champ_histo.getText()!=""){
+//
+//                CharSequence saisie1 = Champ_histo.getText();
+//                ArrayList list[]=split(saisie1);
+//                CharSequence saisie1bis = Champ_histo.getText();
+//
+//                saisie1 = saisie1.subSequence(saisie1.length()-1, saisie1.length());
+//
+//                saisie1bis=saisie1.subSequence(0, saisie1.length()-1);
+//                Toast.makeText(getApplicationContext(), saisie1bis, Toast.LENGTH_SHORT).show();
+//
+//                Nombre1= Float.parseFloat(saisie1bis.toString());
+//
 //                CharSequence saisie2 = Champ_saisie.getText();
 //                float Nombre3 = Float.parseFloat(saisie2.toString());
 //                Champ_histo.append(Champ_saisie.getText().toString());
 //
-//                if (Operation == "Div") {
+//                if (saisie1 == "÷") {
 //                    calc_succ= Nombre1/Nombre3;
 //                }
-//                if (Operation == "Mul") {
+//                if (saisie1 == "×") {
 //                    calc_succ= Nombre1*Nombre3;
 //                }
-//                if (Operation == "Minus") {
+//                if (saisie1 == "-") {
 //                    calc_succ= Nombre1-Nombre3;
 //                }
-//                if (Operation == "Plus") {
+//                if (saisie1 == "+") {
 //                    calc_succ= Nombre1+Nombre3;
 //                }
 //                Champ_resultat.setText(Float.toString(calc_succ));
