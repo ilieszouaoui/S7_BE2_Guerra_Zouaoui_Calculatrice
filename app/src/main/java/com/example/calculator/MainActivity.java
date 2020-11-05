@@ -297,9 +297,9 @@ public class MainActivity extends AppCompatActivity{
             public void onClick(View v) {
                 if(ButtonInitialize) {
                     CharSequence saisie1 = Champ_saisie.getText();
-                    float saisie2 = Float.parseFloat(saisie1.toString());
-                    saisie2 = 0.01f * saisie2;
-                    Champ_saisie.setText(Float.toString(saisie2));
+                    double saisie2 = Float.parseFloat(saisie1.toString());
+                    saisie2 = 0.01d * saisie2;
+                    Champ_saisie.setText(Double.toString(saisie2));
                 }
                 else{
                     Toast.makeText(getApplicationContext(), "Please select numbers", Toast.LENGTH_SHORT).show();
